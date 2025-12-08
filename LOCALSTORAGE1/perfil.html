@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  
+
+ <!-- boostrap  *SOLO* para iconos en el footer-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
+
+
+<style>
+/* Suavizado general para evitar texto irregular */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* ========= HEADER PERFIL ========= */
+
+.header-perfil {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.header-perfil h1 {
+    font-size: 32px;
+    font-weight: 300; /* más consistente que 200 */
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.header-perfil p {
+    font-size: 15px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* ========= CONTENEDOR PRINCIPAL ========= */
+
+.perfil-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+/* ========= HEADER DE LA TARJETA ========= */
+
+.perfil-header-card {
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+    padding: 40px 20px;
+    text-align: center;
+    color: white;
+}
+
+.avatar-perfil {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 50px;
+    border: 3px solid white;
+}
+
+.perfil-header-card h2 {
+    font-size: 24px;
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+.perfil-header-card p {
+    margin: 5px 0;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* ========= BODY ========= */
+
+.perfil-body {
+    padding: 40px;
+}
+
+.perfil-seccion {
+    margin-bottom: 40px;
+}
+
+.perfil-seccion:last-child {
+    margin-bottom: 0;
+}
+
+/* ========= SECCIÓN TÍTULOS ========= */
+
+.seccion-titulo {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c5aa0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.seccion-titulo i {
+    font-size: 18px;
+}
+
+/* ========= FORMULARIOS ========= */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.form-row.full {
+    grid-template-columns: 1fr;
+}
+
+.form-group-perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-perfil label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form-group-perfil label i {
+    color: #2c5aa0;
+    font-size: 14px;
+}
+
+.form-group-perfil input {
+    padding: 13px 16px;
+    border: 2px solid #e8eef5;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.form-group-perfil input:focus {
+    outline: none;
+    border-color: #2c5aa0;
+    box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.15);
+}
+
+.form-group-perfil input[readonly] {
+    background: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+    border-color: #e0e0e0;
+}
+
+/* ========= BOTONES ========= */
+
+.acciones-perfil {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-perfil {
+    flex: 1;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-guardar {
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+    color: white;
+}
+
+.btn-guardar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 58, 82, 0.4);
+}
+
+.btn-volver {
+    background: #f0f0f0;
+    color: #333;
+    border: 2px solid #e0e0e0;
+}
+
+.btn-volver:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.btn-cerrar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cerrar:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ========= MENSAJES ========= */
+
+.info-estado,
+.info-error {
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-estado {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+    color: #2e7d32;
+}
+
+.info-error {
+    background: #ffebee;
+    border: 2px solid #f44336;
+    color: #c62828;
+}
+
+.info-estado.show,
+.info-error.show {
+    display: flex;
+}
+
+footer {
+    background: #1a3a52;
+    color: #ffffff;
+    text-align: center;
+    padding: 35px 20px;
+    margin-top: 40px;
+}
+
+footer .sociales {
+    margin-bottom: 15px;
+}
+
+footer .sociales a {
+    color: #ffffff;
+    font-size: 28px;
+    margin: 0 15px;
+    transition: all 0.3s ease;
+}
+
+footer .sociales a:hover {
+    transform: scale(1.15);
+    color: #dce6f3;
+}
+
+footer p {
+    margin: 5px 0;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Línea divisoria opcional para darle más estructura */
+footer .footer-divider {
+    width: 80%;
+    margin: 15px auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+
+
+/* Forzamos una sola tipografía en todo el sitio */
+* {
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+footer {
+    width: 100vw;            /* fuerza 100% del ancho real */
+    margin-left: calc(50% - 50vw); /* elimina cualquier padding/margen lateral */
+    margin-right: calc(50% - 50vw);
+    background: #1a3a52;
+    color: #ffffff;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+footer .footer-divider {
+    width: 60%;
+    margin: 20px auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+</style>
+
+</head>
+<body onload="cargarDatosUsuario()">
+    <!-- Header -->
+    <div class="header-perfil">
+        <h1><i class="fas fa-user-circle"></i> Mi Perfil</h1>
+        <p>Gestiona tu información personal</p>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="perfil-container position-relative">
+        <!-- Botón Cerrar Sesión -->
+        <button class="btn-cerrar" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i> Salir
+        </button>
+
+        <!-- Header Card con Avatar -->
+        <div class="perfil-header-card">
+            <div class="avatar-perfil">
+                <i class="fas fa-user"></i>
+            </div>
+            <h2 id="nombreCompleto">Tu Nombre</h2>
+            <p id="correoMostrado">tu@email.com</p>
+        </div>
+
+        <!-- Cuerpo del Perfil -->
+        <div class="perfil-body">
+            <!-- Mensajes de estado -->
+            <div id="mensajeExito" class="info-estado">
+                <i class="fas fa-check-circle"></i>
+                <span id="textoExito">Cambios guardados exitosamente</span>
+            </div>
+
+            <div id="mensajeError" class="info-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="textoError">Error al guardar los cambios</span>
+            </div>
+
+            <form id="formPerfil">
+                <!-- Sección: Información Personal -->
+                <div class="perfil-seccion">
+                    <h3 class="seccion-titulo">
+                        <i class="fas fa-id-card"></i> Información Personal
+                    </h3>
+
+                    <div class="form-row">
+                        <div class="form-group-perfil">
+                            <label for="nombres">
+                                <i class="fas fa-user"></i> Nombres
+                            </label>
+                            <input type="text" id="nombres" placeholder="Tu nombre" required>
+                        </div>
+
+                        <div class="form-group-perfil">
+                            <label for="apellidos">
+                                <i class="fas fa-user"></i> Apellidos
+                            </label>
+                            <input type="text" id="apellidos" placeholder="Tu apellido" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group-perfil">
+                            <label for="correo">
+                                <i class="fas fa-envelope"></i> Correo Electrónico
+                            </label>
+                            <input type="email" id="correo" placeholder="tu@email.com" required readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-row full">
+                        <div class="form-group-perfil">
+                            <label for="fechaNacimiento">
+                                <i class="fas fa-birthday-cake"></i> Fecha de Nacimiento
+                            </label>
+                            <input type="date" id="fechaNacimiento" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección: Seguridad - Cambiar Contraseña -->
+                <div class="perfil-seccion">
+                    <h3 class="seccion-titulo">
+                        <i class="fas fa-lock"></i> Seguridad
+                    </h3>
+
+                    <div class="form-row full">
+                        <div class="form-group-perfil">
+                            <label for="claveActual">
+                                <i class="fas fa-key"></i> Contraseña Actual
+                            </label>
+                            <input type="password" id="claveActual" placeholder="Ingresa tu contraseña actual para cambios">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group-perfil">
+                            <label for="nuevaClave">
+                                <i class="fas fa-lock"></i> Nueva Contraseña
+                            </label>
+                            <input type="password" id="nuevaClave" placeholder="Mínimo 8 caracteres (opcional)">
+                        </div>
+
+                        <div class="form-group-perfil">
+                            <label for="confirmarNuevaClave">
+                                <i class="fas fa-lock"></i> Confirmar Contraseña
+                            </label>
+                            <input type="password" id="confirmarNuevaClave" placeholder="Repite tu contraseña">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="acciones-perfil">
+                    <button type="button" class="btn-perfil btn-guardar" onclick="actualizarPerfil()">
+                        <i class="fas fa-save"></i> Guardar Cambios
+                    </button>
+                    <button type="button" class="btn-perfil btn-volver" onclick="window.location.href='inicio.html'">
+                        <i class="fas fa-arrow-left"></i> Volver
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="JS/App.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<section>
+  <footer>
+    <div class="sociales" id="Contacto">
+        <a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://tiktok.com" target="_blank"><i class="bi bi-tiktok"></i></a>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <p>©2025 Todos los derechos reservados</p>
+    <p>David Franco - Duvan Guzman</p>
+</footer>
+</section>
+
+
+</body>
+</html>

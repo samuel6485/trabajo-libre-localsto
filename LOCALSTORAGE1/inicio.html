@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>consesionario de carros</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- boostrap  *SOLO* para iconos en el footer-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+    min-height: 100vh;
+    padding-bottom: 30px;
+  }
+
+  /* Header más compacto y moderno */
+  .header-inicio {
+    background: linear-gradient(135deg, #2c5aa0 0%, #1a3a52 100%);
+    color: white;
+    padding: 18px 0;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .main-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .header-inicio h1 {
+    font-size: 22px;
+    margin: 0;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #mensajeBienvenida {
+    margin: 6px 0 0 0 !important;
+    font-size: 13px !important;
+    opacity: 0.95 !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+  }
+
+  #mensajeBienvenida a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    padding-bottom: 1px;
+  }
+
+  #mensajeBienvenida a:hover {
+    border-bottom-color: white;
+  }
+
+  .btn-cerrar-sesion {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-cerrar-sesion:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Formulario para agregar tarea */
+  .form-tarea-container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-left: 4px solid #2c5aa0;
+    transition: all 0.3s ease;
+  }
+
+  .form-tarea-container:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .form-tarea-container h3 {
+    color: #1a3a52;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+  }
+
+  .form-tarea-container h3 i {
+    color: #2c5aa0;
+    font-size: 20px;
+  }
+
+  .input-group-tarea {
+    display: flex;
+    gap: 10px;
+  }
+
+  .input-group-tarea input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e8eef5;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+  }
+
+  .input-group-tarea input::placeholder {
+    color: #a0aec0;
+  }
+
+  .input-group-tarea input:focus {
+    outline: none;
+    border-color: #2c5aa0;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+  }
+
+  .btn-agregar {
+    background: linear-gradient(135deg, #2c5aa0 0%, #1a3a52 100%);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+  }
+
+  .btn-agregar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(44, 90, 160, 0.4);
+    background: linear-gradient(135deg, #1a3a52 0%, #0f2840 100%);
+  }
+
+  /* Contenedor de tareas con búsqueda integrada */
+  .tareas-container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #2c5aa0;
+    transition: all 0.3s ease;
+  }
+
+  .tareas-container:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Header de tareas con búsqueda integrada */
+  .tareas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .tareas-title {
+    color: #1a3a52;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .tareas-title i {
+    color: #2c5aa0;
+    font-size: 20px;
+  }
+
+  /* Barra de búsqueda integrada */
+  .busqueda-integrada {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    max-width: 450px;
+  }
+
+  .busqueda-input-wrapper {
+    position: relative;
+    flex: 1;
+  }
+
+  #buscarTarea {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    border: 2px solid #e8eef5;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+  }
+
+  #buscarTarea::placeholder {
+    color: #a0aec0;
+    font-size: 13px;
+  }
+
+  #buscarTarea:focus {
+    outline: none;
+    border-color: #2c5aa0;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .btn-limpiar-busqueda {
+    background: #f1f5f9;
+    border: 2px solid #e8eef5;
+    color: #64748b;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .btn-limpiar-busqueda:hover {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Contador de resultados */
+  .contador-resultados {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+    border-left: 3px solid #2c5aa0;
+    border-radius: 6px;
+    color: #1a3a52;
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .contador-resultados.show {
+    display: flex;
+  }
+
+  .contador-resultados i {
+    color: #2c5aa0;
+  }
+
+  /* Divisor visual */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e8eef5, transparent);
+    margin: 18px 0;
+  }
+
+  /* Lista vacía mejorada */
+  .lista-vacia {
+    text-align: center;
+    color: #94a3b8;
+  }
+
+  .lista-vacia i {
+    font-size: 60px;
+    margin-bottom: 18px;
+    color: #cbd5e1;
+    display: block;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .lista-vacia p {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    color: #64748b;
+  }
+
+  .lista-vacia small {
+    font-size: 13px;
+    color: #94a3b8;
+  }
+
+  /* Tareas con diseño mejorado */
+  .tarea-item {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border: 1px solid #e8eef5;
+    border-left: 3px solid #2c5aa0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tarea-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #2c5aa0, #1a3a52);
+    transition: width 0.3s ease;
+  }
+
+  .tarea-item:hover {
+    border-left-color: #1a3a52;
+    background: white;
+    box-shadow: 0 4px 15px rgba(44, 90, 160, 0.15);
+    transform: translateX(4px);
+  }
+
+  .tarea-item.highlight {
+    animation: highlightPulse 0.8s ease;
+    border-left-color: #fbbf24;
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  }
+
+  @keyframes highlightPulse {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  .tarea-contenido {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .tarea-icono {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c5aa0;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .tarea-texto {
+    flex: 1;
+    font-size: 14px;
+    color: #2d3748;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    word-break: break-word;
+  }
+
+  .tarea-acciones {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Botones rediseñados */
+  .btn-accion {
+    padding: 7px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-accion i {
+    font-size: 12px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .btn-editar {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-editar:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  }
+
+  .btn-eliminar {
+    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+  }
+
+  .btn-eliminar:hover {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  }
+
+  /* Modal mejorado */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background-color: white;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 480px;
+    animation: slideIn 0.3s ease;
+    position: relative;
+    border-left: 4px solid #2c5aa0;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* BOTÓN DE CERRAR (X) */
+  .close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #94a3b8;
+    cursor: pointer;
+    background: white;
+    border: none;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: 0.2s ease;
+  }
+
+  .close:hover {
+    color: #ef4444;
+    background: #fee2e2;
+    transform: scale(1.1);
+  }
+
+  /* TÍTULO DEL MODAL */
+  .modal-content h3 {
+    margin: 0 0 22px 0;
+    color: #1a3a52;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+  }
+
+  .modal-content h3 i {
+    color: #2c5aa0;
+  }
+
+  /* INPUTS */
+  .modal-content input {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border: 2px solid #e8eef5;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+  }
+
+  .modal-content input:focus {
+    outline: none;
+    border-color: #2c5aa0;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+  }
+
+  /* BOTÓN PRINCIPAL DEL MODAL (GUARDAR) */
+  .modal-content button.btn-modal-primary {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #2c5aa0 0%, #1a3a52 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+  }
+
+  .modal-content button.btn-modal-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(44, 90, 160, 0.4);
+  }
+
+
+  /* Mensaje de error */
+  .mensaje-error-tarea {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    padding: 8px 12px;
+    background: #fee2e2;
+    border-left: 3px solid #ef4444;
+    border-radius: 6px;
+  }
+
+  .mensaje-error-tarea.show {
+    display: flex;
+    animation: slideIn 0.3s ease;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .input-group-tarea {
+      flex-direction: column;
+    }
+
+    .btn-agregar {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .tareas-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .busqueda-integrada {
+      max-width: 100%;
+      flex-direction: column;
+    }
+
+    .btn-limpiar-busqueda {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .tarea-item {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .tarea-contenido {
+      margin-bottom: 8px;
+    }
+
+    .tarea-acciones {
+      width: 100%;
+    }
+
+    .btn-accion {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-inicio h1 {
+      font-size: 18px;
+    }
+
+    #mensajeBienvenida {
+      font-size: 12px !important;
+    }
+
+    .form-tarea-container,
+    .tareas-container {
+      padding: 20px;
+    }
+  }
+
+  /* ===== FOOTER ===== */
+  /* ===== FOOTER ===== */
+  footer {
+    background: #1a3a52;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 15px;
+  }
+
+  .sociales a {
+    color: #ffffff;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 5px;
+    font-size: 23px;
+  }
+
+  .sociales a:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    color: #000000;
+
+  }
+
+  /* Pantallas grandes */
+  @media (min-width: 1400px) {
+
+    .galeria {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .card-stack {
+      width: 220px;
+      height: 300px;
+    }
+
+    .tematica-section {
+      max-width: 1200px;
+    }
+  }
+
+
+
+  footer {
+    width: 100vw;
+    /* fuerza 100% del ancho real */
+    margin-left: calc(50% - 50vw);
+    /* elimina cualquier padding/margen lateral */
+    margin-right: calc(50% - 50vw);
+    background: #1a3a52;
+    color: #ffffff;
+    text-align: center;
+    padding: 35px 20px;
+  }
+
+  footer .footer-divider {
+    width: 60%;
+    margin: 20px auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .img-car {
+    width: 100%;
+    height: 180px;
+    /* puedes subirlo a 200px si quieres más grande */
+    object-fit: cover;
+    /* recorta la imagen sin deformar */
+    border-radius: 10px;
+  }
+</style>
+</head>
+
+<body onload="mostrarBienvenida()">
+  <!-- Header compacto -->
+  <div class="header-inicio">
+    <div class="main-container">
+      <div class="header-content">
+        <div>
+          <h1><i class="fas fa-tasks"></i> consesionario de carros</h1>
+          <p id="mensajeBienvenida"><i class="fas fa-user-circle"></i></p>
+        </div>
+        <button class="btn-cerrar-sesion" onclick="cerrarSesion()">
+          <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!--filtro -->
+  <div class="mensaje-error-tarea" id="errorNuevaTarea">
+    <i class="fas fa-exclamation-circle"></i>
+    <span></span>
+  </div>
+  </form>
+  </div>
+
+  <!-- Lista de tareas con búsqueda integrada -->
+  <div class="tareas-container">
+    <!-- Header con búsqueda -->
+    <div class="tareas-header">
+      <h3 class="tareas-title">
+        <i class="fas fa-list-check"></i>lista de Carros
+      </h3>
+
+      <!-- Búsqueda integrada -->
+      <div class="busqueda-integrada">
+        <div class="busqueda-input-wrapper">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" id="buscarTarea" placeholder="Busca tu carro ideal..." autocomplete="off">
+        </div>
+        <button class="btn-limpiar-busqueda" onclick="limpiarBusqueda()">
+          <i class="fas fa-times"></i> Limpiar
+        </button>
+      </div>
+    </div>
+
+    <!-- Contador de resultados -->
+    <div class="contador-resultados" id="contadorResultados">
+      <i class="fas fa-filter"></i>
+      <span id="textoContador"></span>
+    </div>
+
+    <!-- Divisor -->
+    <div class="divider"></div>
+
+
+
+    <button class="btn-agregar" onclick="abrirModalAgregar()">
+      <i class="fas fa-plus-circle"></i> Registrar nuevo vehículo
+    </button>
+
+
+
+    <!-- CONTENEDOR DE CATÁLOGO DE CARROS -->
+    <div class="tareas-container">
+      <h3 class="tareas-title">
+        <i class="fas fa-car"></i> Catálogo de Vehículos
+      </h3>
+
+      <div class="divider"></div>
+
+      <div id="contenedorCarros" class="row g-4">
+
+        <!-- 1 -->
+        <div class="col-md-4" data-id="1">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/1.png" class="img-car">
+            <h4 class="titulo-carro">Toyota Corolla 2024</h4>
+            <p>Motor 2.0 • Automático • Full equipo</p>
+            <p class="precio-carro"><strong>$24,900</strong></p>
+
+            <div class="tarea-acciones" style="justify-content:center; margin-top:8px;">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="col-md-4" data-id="2">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/2.jpg" class="img-car">
+            <h4 class="titulo-carro">Mazda 3 Touring</h4>
+            <p>Motor 2.5 • Automático • Aros 18"</p>
+            <p class="precio-carro"><strong>$27,500</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="col-md-4" data-id="3">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/3.jpg" class="img-car">
+            <h4 class="titulo-carro">Chevrolet Onix Turbo</h4>
+            <p>Motor 1.0 Turbo • Automático</p>
+            <p class="precio-carro"><strong>$18,700</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="col-md-4" data-id="4">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/4.jpg" class="img-car">
+            <h4 class="titulo-carro">Kia Sportage 2023</h4>
+            <p>Motor 2.0 • SUV • Full equipo</p>
+            <p class="precio-carro"><strong>$32,900</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="col-md-4" data-id="5">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/5.jpg" class="img-car">
+            <h4 class="titulo-carro">Hyundai Tucson</h4>
+            <p>Motor 2.0 • Automático • 4x2</p>
+            <p class="precio-carro"><strong>$30,500</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="col-md-4" data-id="6">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/6.jpg" class="img-car">
+            <h4 class="titulo-carro">Ford Mustang GT</h4>
+            <p>Motor V8 • 460HP • Deportivo</p>
+            <p class="precio-carro"><strong>$52,800</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="col-md-4" data-id="7">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/7.jpg" class="img-car">
+            <h4 class="titulo-carro">BMW Serie 3</h4>
+            <p>Motor 2.0 TwinPower Turbo</p>
+            <p class="precio-carro"><strong>$43,200</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="col-md-4" data-id="8">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/8.jpg" class="img-car">
+            <h4 class="titulo-carro">Audi A4</h4>
+            <p>Motor 2.0 TFSI • Lujo</p>
+            <p class="precio-carro"><strong>$46,900</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="col-md-4" data-id="9">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/9.jpg" class="img-car">
+            <h4 class="titulo-carro">Mercedes Benz C180</h4>
+            <p>Motor Turbo • Interior Premium</p>
+            <p class="precio-carro"><strong>$49,700</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="col-md-4" data-id="10">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/10.jpg" class="img-car">
+            <h4 class="titulo-carro">Nissan Versa</h4>
+            <p>Económico • Motor 1.6</p>
+            <p class="precio-carro"><strong>$16,900</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="col-md-4" data-id="11">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/11.jpg" class="img-car">
+            <h4 class="titulo-carro">Volkswagen Golf GTI</h4>
+            <p>Motor 2.0 Turbo • Deportivo</p>
+            <p class="precio-carro"><strong>$39,800</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="col-md-4" data-id="12">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/12.jpg" class="img-car">
+            <h4 class="titulo-carro">Honda Civic</h4>
+            <p>Motor 1.5 Turbo • Automático</p>
+            <p class="precio-carro"><strong>$28,600</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="col-md-4" data-id="13">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/13.jpg" class="img-car">
+            <h4 class="titulo-carro">Dodge Charger</h4>
+            <p>Motor V6 • Sedán deportivo</p>
+            <p class="precio-carro"><strong>$41,300</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="col-md-4" data-id="14">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/14.png" class="img-car">
+            <h4 class="titulo-carro">Subaru WRX</h4>
+            <p>Motor Turbo • Tracción AWD</p>
+            <p class="precio-carro"><strong>$37,900</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div class="col-md-4" data-id="15">
+          <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="img/15.jpg" class="img-car">
+            <h4 class="titulo-carro">Jeep Wrangler</h4>
+            <p>4x4 • Off-road • Motor 3.6L</p>
+            <p class="precio-carro"><strong>$48,500</strong></p>
+
+            <div class="tarea-acciones">
+              <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                <i class="fas fa-pen"></i> Editar
+              </button>
+              <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- MODAL PARA EDITAR TARJETAS DEL CATÁLOGO -->
+    <div id="modalEditarCarro" class="modal">
+      <div class="modal-content">
+        <button class="close" onclick="cerrarModalEditar()">&times;</button>
+
+        <h3><i class="fas fa-car"></i> Editar Vehículo</h3>
+
+        <input type="text" id="editarNombre" placeholder="Nuevo nombre del vehículo">
+        <input type="text" id="editarPrecio" placeholder="Nuevo precio (Ej: $25,000)">
+
+        <button class="btn-modal-primary" onclick="guardarEdicionCarro()">
+
+          <i class="fas fa-save"></i> Guardar Cambios
+        </button>
+      </div>
+    </div>
+
+
+
+
+    <!-- MODAL PARA AGREGAR NUEVO VEHÍCULO -->
+    <div id="modalAgregarCarro" class="modal">
+      <div class="modal-content">
+        <button class="close" onclick="cerrarModalAgregar()">&times;</button>
+
+        <h3><i class="fas fa-plus-circle"></i> Nuevo Vehículo</h3>
+
+        <input type="text" id="nuevoNombre" placeholder="Nombre del vehículo">
+        <input type="text" id="nuevaDescripcion" placeholder="Descripción (Motor, tipo...)">
+        <input type="text" id="nuevoPrecio" placeholder="Precio (Ej: $25,000)">
+        <input type="text" id="nuevaImagen" placeholder="URL de imagen">
+
+        <button onclick="guardarNuevoCarro()">
+          <i class="fas fa-save"></i> Guardar Vehículo
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- ===== FOOTER ===== -->
+    <section>
+      <footer>
+        <div class="sociales" id="Contacto">
+          <a href="https://facebook.com" target="_blank"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com" target="_blank"><i class="bi bi-instagram"></i></a>
+          <a href="https://tiktok.com" target="_blank"><i class="bi bi-tiktok"></i></a>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <p>©2025 Todos los derechos reservados</p>
+        <p>David Franco - Duvan Guzman</p>
+      </footer>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <!--scrip de busqueda-->
+
+    <script>
+      const inputBusqueda = document.getElementById("buscarTarea");
+      const contenedorCarros = document.getElementById("contenedorCarros");
+      const contadorResultados = document.getElementById("contadorResultados");
+      const textoContador = document.getElementById("textoContador");
+
+      // Activar filtro cada vez que escribes
+      inputBusqueda.addEventListener("input", filtrarCarros);
+
+      function filtrarCarros() {
+        const texto = inputBusqueda.value.toLowerCase().trim();
+        const tarjetas = contenedorCarros.getElementsByClassName("col-md-4");
+
+        let resultados = 0;
+
+        for (let card of tarjetas) {
+          const contenido = card.innerText.toLowerCase();
+
+          // Si coincide con el texto buscado, lo muestra
+          if (contenido.includes(texto)) {
+            card.style.display = "block";
+            resultados++;
+          } else {
+            card.style.display = "none";
+          }
+        }
+
+        // Mostrar contador si hay texto en el buscador
+        if (texto.length > 0) {
+          contadorResultados.classList.add("show");
+          textoContador.innerText = resultados + " resultados encontrados";
+        } else {
+          contadorResultados.classList.remove("show");
+        }
+      }
+
+      // Botón "Limpiar"
+      function limpiarBusqueda() {
+        inputBusqueda.value = "";
+        filtrarCarros();
+      }
+
+
+
+
+
+      // agregrar 
+
+      // ===================================================
+      // ABRIR / CERRAR MODAL DE AGREGAR
+      // ===================================================
+      function abrirModalAgregar() {
+        document.getElementById("modalAgregarCarro").classList.add("show");
+      }
+
+      function cerrarModalAgregar() {
+        document.getElementById("modalAgregarCarro").classList.remove("show");
+      }
+
+      // ===================================================
+      // CREAR UN NUEVO VEHÍCULO
+      // ===================================================
+      function guardarNuevoCarro() {
+        const nombre = document.getElementById("nuevoNombre").value.trim();
+        const descripcion = document.getElementById("nuevaDescripcion").value.trim();
+        const precio = document.getElementById("nuevoPrecio").value.trim();
+        const imagen = document.getElementById("nuevaImagen").value.trim();
+
+        if (!nombre || !descripcion || !precio || !imagen) {
+          alert("Todos los campos son obligatorios.");
+          return;
+        }
+
+        const contenedor = document.getElementById("contenedorCarros");
+
+        // Obtener un nuevo ID incremental
+        const guardados = JSON.parse(localStorage.getItem("carros")) || {};
+        const nuevoId = obtenerNuevoID(guardados);
+
+        // CREAR ELEMENTO TARJETA
+        const col = document.createElement("div");
+        col.className = "col-md-4";
+        col.dataset.id = nuevoId;
+
+        col.innerHTML = `
+        <div class="tarea-item" style="flex-direction: column; text-align: center;">
+            <img src="${imagen}" class="img-car">
+            <h4 class="titulo-carro">${nombre}</h4>
+            <p>${descripcion}</p>
+            <p class="precio-carro"><strong>${precio}</strong></p>
+
+            <div class="tarea-acciones" style="justify-content:center; margin-top:8px;">
+                <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                    <i class="fas fa-pen"></i> Editar
+                </button>
+                <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    `;
+
+        // Insertar en pantalla
+        contenedor.appendChild(col);
+
+        // Guardar en localStorage
+        guardarCambios(nuevoId, {
+          titulo: nombre,
+          descripcion: descripcion,
+          precio: precio,
+          imagen: imagen,
+          eliminado: false
+        });
+
+        cerrarModalAgregar();
+
+        // Limpiar campos
+        document.getElementById("nuevoNombre").value = "";
+        document.getElementById("nuevaDescripcion").value = "";
+        document.getElementById("nuevoPrecio").value = "";
+        document.getElementById("nuevaImagen").value = "";
+      }
+
+      // Crear un ID nuevo basado en el mayor existente
+      function obtenerNuevoID(data) {
+        const numeros = Object.keys(data).map(id => parseInt(id));
+        return numeros.length ? Math.max(...numeros) + 1 : 16; // Empieza en 16 para no pisar los 1–15
+      }
+
+
+
+    </script>
+
+
+
+
+
+
+
+    <script>
+      // ===================================================
+      // INICIALIZACIÓN
+      // ===================================================
+      document.addEventListener("DOMContentLoaded", function () {
+        cargarCarrosGuardados();
+      });
+
+      // ===================================================
+      // CARGAR ESTADO DESDE LOCALSTORAGE
+      // ===================================================
+      function cargarCarrosGuardados() {
+        const guardados = JSON.parse(localStorage.getItem("carros")) || {};
+        const contenedor = document.getElementById("contenedorCarros");
+
+        Object.keys(guardados).forEach(id => {
+          const data = guardados[id];
+
+          // Si está eliminado → no se muestra
+          if (data.eliminado === true) return;
+
+          // Buscar tarjeta original
+          let card = document.querySelector(`[data-id="${id}"]`);
+
+          // ==========================================================
+          // SI LA TARJETA NO EXISTE → ES UN CARRO NUEVO → CREARLO
+          // ==========================================================
+          if (!card) {
+            card = document.createElement("div");
+            card.className = "col-md-4";
+            card.dataset.id = id;
+
+            card.innerHTML = `
+                <div class="tarea-item" style="flex-direction: column; text-align: center;">
+                    <img src="${data.imagen}" class="img-car">
+                    <h4 class="titulo-carro">${data.titulo}</h4>
+                    <p>${data.descripcion}</p>
+                    <p class="precio-carro"><strong>${data.precio}</strong></p>
+
+                    <div class="tarea-acciones" style="justify-content:center; margin-top:8px;">
+                        <button class="btn-accion btn-editar" onclick="editarCarro(this)">
+                            <i class="fas fa-pen"></i> Editar
+                        </button>
+                        <button class="btn-accion btn-eliminar" onclick="eliminarCarro(this)">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            contenedor.appendChild(card);
+            return;
+          }
+
+          // ==========================================================
+          // SI LA TARJETA YA EXISTE → ACTUALIZAR SUS DATOS
+          // ==========================================================
+          if (data.titulo) {
+            card.querySelector(".titulo-carro").innerText = data.titulo;
+          }
+          if (data.descripcion) {
+            card.querySelector("p").innerText = data.descripcion;
+          }
+          if (data.precio) {
+            card.querySelector(".precio-carro").innerHTML = `<strong>${data.precio}</strong>`;
+          }
+          if (data.imagen) {
+            card.querySelector("img").src = data.imagen;
+          }
+        });
+      }
+
+      // ===================================================
+      // EDITAR VEHÍCULO
+      // ===================================================
+      let tarjetaActual = null;
+
+      function editarCarro(btn) {
+        tarjetaActual = btn.closest(".col-md-4");
+        if (!tarjetaActual) return;
+
+        const tituloEl = tarjetaActual.querySelector(".titulo-carro");
+        const precioEl = tarjetaActual.querySelector(".precio-carro");
+
+        const nombre = tituloEl ? tituloEl.innerText : "";
+        const precio = precioEl ? precioEl.innerText : "";
+
+        document.getElementById("editarNombre").value = nombre;
+        document.getElementById("editarPrecio").value = precio;
+
+        document.getElementById("modalEditarCarro").classList.add("show");
+      }
+
+      function guardarEdicionCarro() {
+        if (!tarjetaActual) return;
+
+        const nuevoNombre = document.getElementById("editarNombre").value.trim();
+        const nuevoPrecio = document.getElementById("editarPrecio").value.trim();
+
+        if (!nuevoNombre || !nuevoPrecio) {
+          alert("Todos los campos son obligatorios.");
+          return;
+        }
+
+        const id = tarjetaActual.dataset.id;
+
+        // Actualizar DOM
+        const tituloEl = tarjetaActual.querySelector(".titulo-carro");
+        const precioEl = tarjetaActual.querySelector(".precio-carro");
+
+        if (tituloEl) tituloEl.innerText = nuevoNombre;
+        if (precioEl) precioEl.innerHTML = `<strong>${nuevoPrecio}</strong>`;
+
+        // Guardar en localStorage
+        guardarCambios(id, {
+          titulo: nuevoNombre,
+          precio: nuevoPrecio,
+          eliminado: false   // aseguramos que no quede marcado como eliminado
+        });
+
+        cerrarModalEditar();
+      }
+
+      function cerrarModalEditar() {
+        document.getElementById("modalEditarCarro").classList.remove("show");
+      }
+
+      // ===================================================
+      // ELIMINAR VEHÍCULO
+      // ===================================================
+      function eliminarCarro(btn) {
+        if (!confirm("¿Seguro que deseas eliminar este vehículo?")) return;
+
+        const card = btn.closest(".col-md-4");
+        if (!card) return;
+
+        const id = card.dataset.id;
+
+        // 1) Eliminar del DOM
+        card.remove();
+
+        // 2) Guardar estado eliminado en localStorage
+        guardarCambios(id, { eliminado: true });
+      }
+
+      // ===================================================
+      // GUARDAR EN LOCALSTORAGE
+      // ===================================================
+      function guardarCambios(id, datos) {
+        const guardados = JSON.parse(localStorage.getItem("carros")) || {};
+
+        guardados[id] = {
+          ...(guardados[id] || {}),
+          ...datos
+        };
+
+        localStorage.setItem("carros", JSON.stringify(guardados));
+      }
+    </script>
+
+
+
+    <script src="JS/App.js"></script>
+
+</body>
+
+</html>

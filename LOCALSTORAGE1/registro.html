@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Usuario</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Estilos base del body */
+    body {
+      background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Contenedor principal del registro */
+    .registro-container {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .registro-container:hover {
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+      transform: translateY(-5px);
+    }
+
+    /* Header del formulario */
+    .registro-header {
+      background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .check-exito {
+      position: absolute;
+      right: 15px;
+      top: 66% !important;
+      transform: translateY(-50%);
+      color: #27ae60;
+      font-size: 18px;
+    }
+
+    .registro-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="20" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="80" r="30" fill="rgba(255,255,255,0.03)"/></svg>');
+      opacity: 0.5;
+    }
+
+    .registro-header h1 {
+      font-size: 32px;
+      margin: 0 0 15px 0;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .registro-header p {
+      margin: 0;
+      font-size: 15px;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.3px;
+    }
+
+    .registro-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+      display: block;
+      position: relative;
+      z-index: 1;
+      animation: bounce 3s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Cuerpo del formulario */
+    .registro-body {
+      padding: 45px;
+    }
+
+    .form-group-registro {
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .form-group-registro label {
+      display: block;
+      font-weight: 700;
+      color: #1a3a52;
+      margin-bottom: 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group-registro label i {
+      color: #2c5aa0;
+      margin-right: 5px;
+    }
+
+    .form-group-registro input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid #e8eef5;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      background: #f8fafc;
+    }
+
+    .form-group-registro input::placeholder {
+      color: #a0aec0;
+    }
+
+    .form-group-registro input:focus {
+      outline: none;
+      border-color: #2c5aa0;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(44, 90, 160, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Botón de registro */
+    .btn-registrarse {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #1a3a52 0%, #2c5aa0 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 25px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(26, 58, 82, 0.25);
+    }
+
+    .btn-registrarse:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(26, 58, 82, 0.4);
+      background: linear-gradient(135deg, #0f2840 0%, #1a4a7d 100%);
+    }
+
+    .btn-registrarse:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-registrarse i {
+      font-size: 16px;
+    }
+
+    /* Footer del formulario */
+    .registro-footer {
+      text-align: center;
+      padding: 0;
+      border-top: 1px solid #e8eef5;
+      padding-top: 20px;
+    }
+
+    .registro-footer p {
+      margin: 0;
+      color: #636b7a;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .registro-footer a {
+      color: #2c5aa0;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .registro-footer a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #2c5aa0;
+      transition: width 0.3s ease;
+    }
+
+    .registro-footer a:hover::after {
+      width: 100%;
+    }
+
+    .registro-footer a:hover {
+      color: #1a3a52;
+    }
+
+    /* Animación para mensajes de error */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .registro-header {
+        padding: 30px 15px;
+      }
+
+      .registro-header h1 {
+        font-size: 22px;
+      }
+
+      .registro-icon {
+        font-size: 36px;
+      }
+
+      .registro-body {
+        padding: 25px;
+      }
+
+      .btn-registrarse {
+        padding: 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="registro-container">
+    <!-- Header -->
+    <div class="registro-header">
+      <i class="fas fa-user-plus registro-icon"></i>
+      <p>Crea tu cuenta en nuestro consesionario de carros</p>
+    </div>
+
+    <!-- Body -->
+    <div class="registro-body">
+      <form id="formRegistro">
+        <!-- Nombres -->
+        <div class="form-group-registro">
+          <label for="nombres">
+            <i class="fas fa-user"></i> Nombres
+          </label>
+          <input 
+            type="text" 
+            id="nombres" 
+            placeholder="Ingresa tus nombres" 
+            autocomplete="given-name"
+            required>
+        </div>
+
+        <!-- Apellidos -->
+        <div class="form-group-registro">
+          <label for="apellidos">
+            <i class="fas fa-user"></i> Apellidos
+          </label>
+          <input 
+            type="text" 
+            id="apellidos" 
+            placeholder="Ingresa tus apellidos" 
+            autocomplete="family-name"
+            required>
+        </div>
+
+        <!-- Correo -->
+        <div class="form-group-registro">
+          <label for="correo">
+            <i class="fas fa-envelope"></i> Correo Electrónico
+          </label>
+          <input 
+            type="email" 
+            id="correo" 
+            placeholder="tu@email.com" 
+            autocomplete="email"
+            required>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-group-registro">
+          <label for="clave">
+            <i class="fas fa-lock"></i> Contraseña
+          </label>
+          <input 
+            type="password" 
+            id="clave" 
+            placeholder="Mínimo 8 caracteres (mayúsculas, minúsculas y números)" 
+            autocomplete="new-password"
+            required>
+        </div>
+
+        <!-- Confirmar Contraseña -->
+        <div class="form-group-registro">
+          <label for="confirmarClave">
+            <i class="fas fa-lock"></i> Confirmar Contraseña
+          </label>
+          <input 
+            type="password" 
+            id="confirmarClave" 
+            placeholder="Repite tu contraseña" 
+            autocomplete="new-password"
+            required>
+        </div>
+
+        <!-- Fecha de Nacimiento -->
+        <div class="form-group-registro">
+          <label for="fechaNacimiento">
+            <i class="fas fa-birthday-cake"></i> Fecha de Nacimiento
+          </label>
+          <input 
+            type="date" 
+            id="fechaNacimiento" 
+            autocomplete="bday"
+            required>
+        </div>
+
+        <!-- Botón Registrarse -->
+        <button type="button" onclick="registrarUsuario()" class="btn-registrarse">
+          <i class="fas fa-check-circle"></i> Registrarse
+        </button>
+      </form>
+
+      <!-- Footer -->
+      <div class="registro-footer">
+        <p>¿Ya tienes cuenta? <a href="index.html">Inicia sesión aquí</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="JS/App.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
